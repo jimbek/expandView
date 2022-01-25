@@ -1,0 +1,29 @@
+.code {
+    background-color: white;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono", "Courier New", monospace;
+    padding: 1.3em;
+}
+
+.display-4 {
+    font-size: 2rem!important;
+}
+
+.lead {
+    font-size: 1rem!important;
+}
+
+.ml-6 {
+    margin-left: 4em;
+}
+
+.ml-7 {
+    margin-left: 5em;
+}
+
+.ml-8 {
+    margin-left: 6em;
+}
+
+.ml-9 {
+    margin-left: 7em;
+}

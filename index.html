@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>expandView by Bek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  
+  <link rel="stylesheet" href="site.css" />
+  <link rel="stylesheet" href="expandView.css" />
+</head>
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        expandView <small>by Bek</small>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+
+      <div class="row">
+          <div class="col-md-5 col-sm-12">
+              <div class="form-group">
+                  <label class="label">
+                      Add below files to your project to generate expandView:
+                  </label>
+              </div>
+              <div class="form-group">
+                  <div class="col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Javascript</label>
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                              <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" value="expandView.js" readonly>
+                      </div>
+                  </div>
+                  <div class="col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Css</label>
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                  <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                              </svg>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" value="expandView.css" readonly>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label class="label">
+                  Repository URL:
+                </label>
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInputGroup">Css</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                          <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                          <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" value="https://github.com/jimbek/expandView" readonly>
+                  </div>
+              </div>
+              </div>
+          </div>
+          <div class="col-md-7 col-sm-12">
+              <div class="form-group">
+                  <label class="h5">
+                      Basic example:
+                  </label>
+              </div>
+              <div class="form-group">
+                  <div id="expandView-demo"></div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-12">
+
+          <div class="jumbotron">
+            <h1 class="display-4">
+              What is expandView?
+            </h1>   
+            <hr class="my-4">
+            <p class="lead">
+              It's a JQuery plugin which allows you to display items with their sub items. You can easily show and hide the nested elements by clicking the arrows.
+            </p>
+          </div>
+
+          <div class="jumbotron">
+            <h1 class="display-4">
+              From which components each item aparts?
+            </h1>
+            <hr class="my-4">
+            <p class="lead">
+              First you need to define the <b>id</b>, which is a unique string.
+            </p>
+            <p class="lead">
+              Then you need to define the <b>title</b>, which is html string.
+            </p>
+            <p class="lead">
+              Optionally, you can specify the <b>total number of sub items</b> or <b>a loading text</b> to be displayed until the nested items come off.
+            </p>
+            <p class="lead">
+              Finally, if there are any sub items, you need to implement <b>a function which returns them as array</b>.
+            </p>
+          </div>
+
+          <div class="jumbotron">
+            <h1 class="display-4">
+              How to implement expandView?
+            </h1>   
+            <hr class="my-4">
+            <div class="lead">
+
+              <div class="form-group">
+                <label class="label">
+                  <b>Html:</b>
+                </label>
+                <div class="code">
+
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="label">
+                  <b>Javascript:</b>
+                </label>
+                <div class="code">
+                  $('#expandView-demo').expandView({
+                  <br />
+                  <span class="ml-1">
+                    items: [
+                  </span>
+                  <br />
+                  <span class="ml-2">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    id: 'a',
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    title: 'Level A',
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    loadingText: 'Loading...',
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    totalChildren: 3,
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    children: function() {
+                  </span>
+                  <br />
+                  <span class="ml-4">
+                    return [
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    id: 'a1',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    title: 'Level A1',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    hasChildren: false
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    },
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    id: 'a2',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    title: 'Level A2',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    children: function() {
+                  </span>
+                  <br />
+                  <span class="ml-7">
+                    return [
+                  </span>
+                  <br />
+                  <span class="ml-8">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-9">
+                    id: 'a22',
+                  </span>
+                  <br />
+                  <span class="ml-9">
+                    title: 'Level A22',
+                  </span>
+                  <br />
+                  <span class="ml-9">
+                    hasChildren: false
+                  </span>
+                  <br />
+                  <span class="ml-8">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-7">
+                    ]
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-4">
+                    ]
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-2">
+                    },
+                  </span>
+                  <br />
+                  <span class="ml-2">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    id: 'b',
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    title: 'Level B',
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    children: function() {
+                  </span>
+                  <br />
+                  <span class="ml-4">
+                    return [
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    {
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    id: 'b1',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    title: 'Level B1',
+                  </span>
+                  <br />
+                  <span class="ml-6">
+                    hasChildren: false
+                  </span>
+                  <br />
+                  <span class="ml-5">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-4">
+                    ]
+                  </span>
+                  <br />
+                  <span class="ml-3">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-2">
+                    }
+                  </span>
+                  <br />
+                  <span class="ml-1">
+                    ]
+                  </span>
+                  <br />
+                  });
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="expandView.js"></script>
+  <script type="text/javascript">
+
+    document.getElementsByClassName('code')[0].innerText = '<div id="expandView-demo"></div>';
+
+    $('#expandView-demo').expandView({
+      items: [
+        {
+          id: 'a',
+          title: 'Level A',
+          loadingText: 'Loading...',
+          totalChildren: 3,
+          children: function() {
+            return [
+              {
+                id: 'a1',
+                title: 'Level A1',
+                hasChildren: false
+              },
+              {
+                id: 'a2',
+                title: 'Level A2',
+                children: function() {
+                  return [
+                    {
+                      id: 'a22',
+                      title: 'Level A22',
+                      hasChildren: false
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          id: 'b',
+          title: 'Level B',
+          children: function() {
+            return [
+              {
+                id: 'b1',
+                title: 'Level B1',
+                hasChildren: false
+              }
+            ]
+          }
+        }
+      ]
+    });
+  
+  </script>
+
+</body>
+</html>

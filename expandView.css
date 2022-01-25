@@ -1,0 +1,42 @@
+.expand-hidden {
+    display: none;
+}
+
+.expand-item {
+    border: 1px solid #888888;
+    border-radius: 6px;
+    margin: 0.3em 0 0.3em 0;
+    padding: 0.7em;
+}
+
+.expand-item > .expand-item-arrow {
+    cursor: pointer;
+    display: inline;
+}
+
+.expand-item-details::selection {
+    background: transparent;
+}
+
+.expand-item-details > .expand-item-loading {
+    text-align: center;
+}
+
+.expand-item > .expand-item-title {
+    display: inline;
+    margin-left: 1em;
+}
+
+.expand-item > .expand-item-title::selection {
+    background: transparent;
+}
+
+.expand-item > .expand-item-total-children {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+    float: right;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
