@@ -49,8 +49,12 @@ jQuery.fn.extend({
           //Add left arrow
           html += '<div expand-item-id="' + options.items[i].id + '"' + ' expand-item-index="' + i + '"' +' class="expand-item-arrow">';
           
-          if (options.items[i].hasChildren == undefined || options.items[i].hasChildren == true) {
-            html += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+          if (options.items[i].children != undefined) {
+            if (options.items[i].open == undefined || options.items[i].open == false) {
+              html += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+            } else {
+              html += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>';
+            }
           }
           
           html += '</div>';
@@ -89,11 +93,17 @@ jQuery.fn.extend({
           //Get value from "expand-item-index" property of "arrow" element
           let index = parseInt($(children[i]).children()[0].getAttribute('expand-item-index'));
           //Implement "click()" function if the element has sub items
-          if (options.items[index].hasChildren == undefined || options.items[index].hasChildren == true) {
+          if (options.items[index].children != undefined) {
             let arrowElement = $($(children[i]).children()[0]);
+
             arrowElement.click(function() {
               arrowElement.expand(options.items[index].children);
             });
+
+            //If item is by default open, we show it's nested items
+            if (options.items[index].open == true) {
+              arrowElement.expand(options.items[index].children);
+            }
           }
         }
       }

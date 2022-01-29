@@ -12,6 +12,10 @@
     font-size: 1rem!important;
 }
 
+.mb-0 {
+    margin-bottom: 0;
+}
+
 .ml-6 {
     margin-left: 4em;
 }

@@ -12,9 +12,6 @@ This project is a JQuery plugin with many capabilities.
     Define svg for open and closed arrow
   </li>
   <li>
-    Specify if an item is by default open
-  </li>
-  <li>
     Ability to add a search bar
   </li>
   <li>
@@ -24,3 +21,5 @@ This project is a JQuery plugin with many capabilities.
     New JQuery functions like <i>expandAll()</i> or <i>closeAll()</i>
   </li>
 </ul>
+
+# Last update: 29/01/2022
