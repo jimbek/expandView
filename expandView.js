@@ -1,6 +1,6 @@
 jQuery.fn.extend({
 
-  expand: function(children) {
+  expand: function(children, closeIcon, openIcon) {
     return this.each(function() {
       //Find elements with the same "expand-item-id" property
       let expandItemId = this.getAttribute('expand-item-id');
@@ -18,11 +18,11 @@ jQuery.fn.extend({
               items: children()
             });
 
-            this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>';
+            this.innerHTML = openIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>' : openIcon;
             expandItemElements[i].classList.remove('expand-hidden');
           } else {
             //We hide "details" div
-            this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+            this.innerHTML = closeIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' : closeIcon;
             expandItemElements[i].classList.add('expand-hidden');
           }
 
@@ -51,9 +51,9 @@ jQuery.fn.extend({
           
           if (options.items[i].children != undefined) {
             if (options.items[i].open == undefined || options.items[i].open == false) {
-              html += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+              html += options.items[i].closeIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' : options.items[i].closeIcon;
             } else {
-              html += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>';
+              html += options.items[i].openIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>' : options.items[i].openIcon;
             }
           }
           
@@ -97,12 +97,12 @@ jQuery.fn.extend({
             let arrowElement = $($(children[i]).children()[0]);
 
             arrowElement.click(function() {
-              arrowElement.expand(options.items[index].children);
+              arrowElement.expand(options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
             });
 
             //If item is by default open, we show it's nested items
             if (options.items[index].open == true) {
-              arrowElement.expand(options.items[index].children);
+              arrowElement.expand(options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
             }
           }
         }

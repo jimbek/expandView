@@ -9,17 +9,23 @@ This project is a JQuery plugin with many capabilities.
 
 <ul>
   <li>
-    Define svg for open and closed arrow
-  </li>
-  <li>
     Ability to add a search bar
   </li>
   <li>
     Ability to add a toolbar with your custom buttons
   </li>
   <li>
-    New JQuery functions like <i>expandAll()</i> or <i>closeAll()</i>
+    Ability to auto generate an id of each item
+  </li>
+  <li>
+    New JQuery functions like <i>expandAll()</i> or <i>collapseAll()</i>
+  </li>
+  <li>
+    Handle events like <i>onExpandItemClick()</i>
+  </li>
+  <li>
+    Connect expandView with Firebase Cloud Messaging to update items in real time
   </li>
 </ul>
 
-# Last update: 29/01/2022
+# Last update: 30/01/2022
