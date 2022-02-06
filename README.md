@@ -12,20 +12,17 @@ This project is a JQuery plugin with many capabilities.
     Ability to add a search bar
   </li>
   <li>
-    Ability to add a toolbar with your custom buttons
-  </li>
-  <li>
     Ability to auto generate an id of each item
   </li>
   <li>
-    New JQuery functions like <i>expandAll()</i> or <i>collapseAll()</i>
+    Handle events like <i>onExpandItemClick()</i>
   </li>
   <li>
-    Handle events like <i>onExpandItemClick()</i>
+    Add a <i>drag and drop</i> functionality
   </li>
   <li>
     Connect expandView with Firebase Cloud Messaging to update items in real time
   </li>
 </ul>
 
-# Last update: 30/01/2022
+# Last update: 06/02/2022

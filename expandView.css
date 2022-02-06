@@ -40,3 +40,8 @@
     width: 30px;
     text-align: center;
 }
+
+.expand-toolbar {
+    display: flex;
+    flex-direction: row-reverse;
+}

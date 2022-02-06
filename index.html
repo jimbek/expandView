@@ -26,12 +26,15 @@
       <div class="col-12">
         <div class="alert alert-success" role="alert">
           <b>
-            New update at 30/01/2022
+            New update at 06/02/2022
           </b>
           <hr />
           <ul class="mb-0">
             <li>
-              Includes the abillity to define an icon or svg for open and closed arrow
+              Includes the ability to add a toolbar with your custom buttons
+            </li>
+            <li>
+              Includes JQuery functions <i>expandAll()</i> and <i>collapseAll()</i>
             </li>
           </ul>
         </div>
@@ -160,6 +163,18 @@
               </label>
               <div class="code">
                 $('#expandView-demo').expandView({
+                <br />
+                <span class="ml-1">
+                  toolbar: [
+                </span>
+                <br />
+                <span id="collapse" class="ml-2"></span>
+                <br />
+                <span id="expand" class="ml-2"></span>
+                <br />
+                <span class="ml-1">
+                  ],
+                </span>
                 <br />
                 <span class="ml-1">
                   items: [
@@ -352,8 +367,14 @@
   <script type="text/javascript">
 
     document.getElementsByClassName('code')[0].innerText = '<div id="expandView-demo"></div>';
+    document.getElementById('collapse').innerText = '\'<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>\',';
+    document.getElementById('expand').innerText = '\'<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>\'';
 
     $('#expandView-demo').expandView({
+      toolbar: [
+        '<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>',
+        '<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>'
+      ],
       items: [
         {
           id: 'a',

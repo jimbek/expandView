@@ -1,5 +1,51 @@
 jQuery.fn.extend({
 
+  expandAll: function() {
+    return this.each(function() {
+      //Loop will stop when all items with children are opened
+      let stop = false;
+      while (!stop) {
+        stop = true;
+        let items = this.querySelectorAll('.expand-item');
+
+        for (let i = 0; i < items.length; i++) {
+          //Get value from "mod" property of "arrow" element
+          let mod = $(items[i]).children()[0].getAttribute('expand-item-mod');
+          //Get value from "expand-item-has-children" property of "arrow" element
+          let hasChildren = $(items[i]).children()[0].getAttribute('expand-item-has-children');
+          //Call "click()" function if the element is collapsed and has sub items
+          if (mod == 'off' && hasChildren == 'true') {
+            let arrowElement = $($(items[i]).children()[0]);
+            arrowElement.click();
+            stop = false;
+          }
+        }
+      }
+    });
+  },
+
+  collapseAll: function() {
+    return this.each(function() {
+      //Loop will stop when all items with children are collapsed
+      let stop = false;
+      while (!stop) {
+        stop = true;
+        let items = this.querySelectorAll('.expand-item');
+
+        for (let i = 0; i < items.length; i++) {
+          //Get value from "mod" property of "arrow" element
+          let mod = $(items[i]).children()[0].getAttribute('expand-item-mod');
+          //Call "click()" function if the element is opened
+          if (mod == 'on') {
+            let arrowElement = $($(items[i]).children()[0]);
+            arrowElement.click();
+            stop = false;
+          }
+        }
+      }
+    });
+  },
+
   expand: function(children, closeIcon, openIcon) {
     return this.each(function() {
       //Find elements with the same "expand-item-id" property
@@ -13,6 +59,9 @@ jQuery.fn.extend({
         if (elementClass.includes('expand-item-details')) {
           //We show children items
           if (elementClass.includes('expand-hidden')) {
+            //Update "expand-item-mod" property
+            this.setAttribute('expand-item-mod', 'on');
+
             //Fetch children items
             $(expandItemElements[i]).expandView({
               items: children()
@@ -21,6 +70,9 @@ jQuery.fn.extend({
             this.innerHTML = openIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg>' : openIcon;
             expandItemElements[i].classList.remove('expand-hidden');
           } else {
+            //Update "expand-item-mod" property
+            this.setAttribute('expand-item-mod', 'off');
+
             //We hide "details" div
             this.innerHTML = closeIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' : closeIcon;
             expandItemElements[i].classList.add('expand-hidden');
@@ -37,6 +89,17 @@ jQuery.fn.extend({
     return this.each(function() {
       //The updated innerHTML
       let html = '';
+
+      //Add toolbar
+      if (options.toolbar != undefined) {
+        html += '<div class="expand-toolbar">'
+
+        for (let i = 0; i < options.toolbar.length; i++) {
+          html += options.toolbar[i];
+        }
+
+        html += '</div>';
+      }
       
       //Check if there are any items
       if (options.items != undefined) {
@@ -47,9 +110,10 @@ jQuery.fn.extend({
           html += '<div expand-item-id="' + options.items[i].id + '" class="expand-item"' + ' style="margin-left:' + marginLeft + 'em;">';
 
           //Add left arrow
-          html += '<div expand-item-id="' + options.items[i].id + '"' + ' expand-item-index="' + i + '"' +' class="expand-item-arrow">';
+          let hasChildren = options.items[i].children != undefined;
+          html += '<div expand-item-id="' + options.items[i].id + '"' + ' expand-item-index="' + i + '" expand-item-has-children="' + hasChildren +'"' +' expand-item-mod="off" class="expand-item-arrow">';
           
-          if (options.items[i].children != undefined) {
+          if (hasChildren) {
             if (options.items[i].open == undefined || options.items[i].open == false) {
               html += options.items[i].closeIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' : options.items[i].closeIcon;
             } else {
