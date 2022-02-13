@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>expandView by Bek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  
+  <link rel="stylesheet" href="site.css" />
+  <link rel="stylesheet" href="expandView.css" />
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">
+      expandView <small>by Bek</small>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="examples.html">Examples</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <h4>Binary search</h4>
+                <div id="binary-search-view"></div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="jumbotron">
+            <div class="code">
+              search: {
+              <br />
+              <span class="ml-1">
+                contains: function(search, item) {
+              </span>
+              <br />
+              <span class="ml-2">
+                if (Number.isNaN(search)) {
+              </span>
+              <br />
+              <span class="ml-3">
+                return false;
+              </span>
+              <br />
+              <span class="ml-2">
+                }
+              </span>
+              <br />
+              <br />
+              <span class="ml-2">
+                let id = item.getAttribute('expand-item-id');
+              </span>
+              <br />
+              <br />
+              <span class="ml-2">
+                if (id == search) {
+              </span>
+              <br />
+              <span class="ml-3">
+                return false;
+              </span>
+              <br />
+              <span class="ml-2">
+                }
+              </span>
+              <br />
+              <br />
+              <span class="ml-2">
+                return parseInt(id.split('-')[0]) <= parseInt(search) && parseInt(id.split('-')[1]) >= parseInt(search);
+              </span>
+              <br />
+              <span class="ml-1">
+                },
+              </span>
+              <br />
+              <span class="ml-1">
+                equals: function(search, item) {
+              </span>
+              <br />
+              <span class="ml-2">
+                if (Number.isNaN(search)) {
+              </span>
+              <br />
+              <span class="ml-3">
+                return false;
+              </span>
+              <br />
+              <span class="ml-2">
+                }
+              </span>
+              <br />
+              <br />
+              <span class="ml-2">
+                return item.getAttribute('expand-item-id') == search;
+              </span>
+              <br />
+              <span class="ml-1">
+                }
+              </span>
+              <br />
+              }
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="expandView.js"></script>
+  <script type="text/javascript">
+  
+    $('#binary-search-view').expandView({
+        search: {
+          contains: function(search, item) {
+            if (Number.isNaN(search)) {
+              return false;
+            }
+
+            let id = item.getAttribute('expand-item-id');
+
+            if (id == search) {
+              return false;
+            }
+
+            return parseInt(id.split('-')[0]) <= parseInt(search) && parseInt(id.split('-')[1]) >= parseInt(search);
+          },
+          equals: function(search, item) {
+            if (Number.isNaN(search)) {
+              return false;
+            }
+
+            return item.getAttribute('expand-item-id') == search;
+          }
+        },
+        items: getBinarySearchItems(1, 64)
+    });
+
+    function getBinarySearchItems(start, end) {
+        let items = [];
+
+        if (start + 1 == end) {
+            items.push({
+                id: start + '',
+                title: start
+            });
+
+            items.push({
+                id: end + '',
+                title: end
+            });
+        } else {
+            let middle = (end + start) / 2;
+
+            items.push({
+                id: start + '-' + parseInt(middle),
+                title: '[' + start + ', ' + parseInt(middle) + ']',
+                children: function() {
+                    return getBinarySearchItems(start, parseInt(middle));
+                }
+            });
+
+            items.push({
+                id: Math.round(middle) + '-' + end,
+                title: '[' + Math.round(middle) + ', ' + end + ']',
+                children: function() {
+                    return getBinarySearchItems(Math.round(middle), end);
+                }
+            });
+        }
+
+        return items;
+    }
+
+  </script>
+
+</body>
+</html>

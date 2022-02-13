@@ -75,6 +75,7 @@ jQuery.fn.extend({
 
             //We hide "details" div
             this.innerHTML = closeIcon == undefined ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' : closeIcon;
+            expandItemElements[i].innerHTML = '';
             expandItemElements[i].classList.add('expand-hidden');
           }
 
@@ -85,14 +86,55 @@ jQuery.fn.extend({
     });
   },
 
+  expandSearch: function(options, search) {
+    return this.each(function() {
+      let id = $(this).prop('id');
+      let searchValue = $('#' + id + ' .expand-search-input').val();
+
+      //Remove class "expand-item-search" from previous results
+      $('#' + id + ' .expand-item-search').removeClass('expand-item-search');
+
+      let found = false;
+      while (!found) {
+        found = true;
+        let children = $('#' + id + ' .expand-item');
+
+        for (let i = 0; i < children.length; i++) {
+          let arrowElement = $($(children[i]).children()[0]);
+          //We expand item if contains the search value
+          if (search.contains(searchValue, children[i])) {
+            //Get value from "expand-item-index" and mod properties of "arrow" element
+            let index = parseInt($(children[i]).children()[0].getAttribute('expand-item-index'));
+            let mod = $(children[i]).children()[0].getAttribute('expand-item-mod');
+            //Call "click()" function if the element has sub items and is closed
+            if (options.items[index].children != undefined && mod == 'off') {
+              arrowElement.click();
+              found = false;
+            }
+          } else if (search.equals(searchValue, children[i])) {
+            $(children[i]).addClass('expand-item-search');
+            found = true;
+          }
+        }
+      }
+    });
+  },
+
   expandView: function(options) {
     return this.each(function() {
+      //Current view
+      let view = this;
       //The updated innerHTML
       let html = '';
 
+      //Add search
+      if (options.search != undefined) {
+        html += '<div class="expand-search"><input type="search" class="expand-search-input" placeholder="Search..."/></div>';
+      }
+
       //Add toolbar
       if (options.toolbar != undefined) {
-        html += '<div class="expand-toolbar">'
+        html += '<div class="expand-toolbar">';
 
         for (let i = 0; i < options.toolbar.length; i++) {
           html += options.toolbar[i];
@@ -149,7 +191,13 @@ jQuery.fn.extend({
       this.innerHTML = html;
 
       //Update JQuery elements
-      let children = $(this).children();
+      if (options.search != undefined) {
+        $('.expand-search-input').change(function() {
+          $(view).expandSearch(options, options.search);
+        });
+      }
+
+      let children = $(view).children();
 
       for (let i = 0; i < children.length; i++) {
         //Check if the element is "expand-item"

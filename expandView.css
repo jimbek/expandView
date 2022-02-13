@@ -41,7 +41,23 @@
     text-align: center;
 }
 
+.expand-item-search {
+    background-color: #e2e2e2;
+}
+
+.expand-search {
+    width: 45%;
+}
+
 .expand-toolbar {
     display: flex;
     flex-direction: row-reverse;
+}
+
+input.expand-search-input {
+    border: 1px solid #888888;
+    border-radius: 6px;
+    margin-left: 1em;
+    outline: none;
+    padding: 0.5em;
 }
