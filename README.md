@@ -1,6 +1,5 @@
 # expandView
 This project is a JQuery plugin with many capabilities.
-
 It's a tool to create treeview list with items and nested items.
 
 <h4>
@@ -26,5 +25,5 @@ It's a tool to create treeview list with items and nested items.
 </ul>
 
 <h2>
-  Last update: 06/02/2022
+  Last update: 13/02/2022
 </h2>
