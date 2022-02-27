@@ -34,12 +34,15 @@
       <div class="col-12">
         <div class="alert alert-success" role="alert">
           <b>
-            New update at 13/02/2022
+            New update at 27/02/2022
           </b>
           <hr />
           <ul class="mb-0">
             <li>
-              Includes the ability to add a search bar
+              Includes the ability to add checkboxes
+            </li>
+            <li>
+              Search location is left from toolbar
             </li>
           </ul>
         </div>
@@ -173,9 +176,9 @@
                   toolbar: [
                 </span>
                 <br />
-                <span id="collapse" class="ml-2"></span>
-                <br />
                 <span id="expand" class="ml-2"></span>
+                <br />
+                <span id="collapse" class="ml-2"></span>
                 <br />
                 <span class="ml-1">
                   ],
@@ -372,13 +375,13 @@
   <script type="text/javascript">
 
     document.getElementsByClassName('code')[0].innerText = '<div id="expandView-demo"></div>';
-    document.getElementById('collapse').innerText = '\'<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>\',';
-    document.getElementById('expand').innerText = '\'<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>\'';
+    document.getElementById('collapse').innerText = '\'<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>\'';
+    document.getElementById('expand').innerText = '\'<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>\',';
 
     $('#expandView-demo').expandView({
       toolbar: [
-        '<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>',
-        '<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>'
+        '<button class="btn btn-info" onclick="$(\'#expandView-demo\').expandAll()">Expand</button>',
+        '<button class="btn btn-secondary ml-1" onclick="$(\'#expandView-demo\').collapseAll()">Collapse</button>'
       ],
       items: [
         {

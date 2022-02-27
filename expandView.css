@@ -22,7 +22,7 @@
     text-align: center;
 }
 
-.expand-item > .expand-item-title {
+.expand-item > .expand-item-check, .expand-item > .expand-item-title {
     display: inline;
     margin-left: 1em;
 }
@@ -43,10 +43,6 @@
 
 .expand-item-search {
     background-color: #e2e2e2;
-}
-
-.expand-search {
-    width: 45%;
 }
 
 .expand-toolbar {

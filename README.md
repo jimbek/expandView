@@ -16,14 +16,8 @@ It's a tool to create treeview list with items and nested items.
   <li>
     Add a <i>drag and drop</i> functionality
   </li>
-  <li>
-    Display a custom context menu on right click
-  </li>
-  <li>
-    Connect expandView with Firebase Cloud Messaging to update items in real time
-  </li>
 </ul>
 
 <h2>
-  Last update: 13/02/2022
+  Last update: 27/02/2022
 </h2>

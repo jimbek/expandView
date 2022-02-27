@@ -46,7 +46,7 @@ jQuery.fn.extend({
     });
   },
 
-  expand: function(children, closeIcon, openIcon) {
+  expand: function(hasCheckboxes, children, closeIcon, openIcon) {
     return this.each(function() {
       //Find elements with the same "expand-item-id" property
       let expandItemId = this.getAttribute('expand-item-id');
@@ -64,6 +64,7 @@ jQuery.fn.extend({
 
             //Fetch children items
             $(expandItemElements[i]).expandView({
+              checkboxes: hasCheckboxes,
               items: children()
             });
 
@@ -120,6 +121,15 @@ jQuery.fn.extend({
     });
   },
 
+  expandCheck: function() {
+    return this.each(function() {
+      $(this).change(function() {
+        let id = $(this).parent().find('.expand-item-arrow').eq(0).attr('expand-item-id');
+        $('div[expand-item-id="' + id + '"].expand-item-details .expand-item-check').prop('checked', $(this).prop('checked'));
+      });
+    });
+  },
+
   expandView: function(options) {
     return this.each(function() {
       //Current view
@@ -127,17 +137,18 @@ jQuery.fn.extend({
       //The updated innerHTML
       let html = '';
 
-      //Add search
-      if (options.search != undefined) {
-        html += '<div class="expand-search"><input type="search" class="expand-search-input" placeholder="Search..."/></div>';
-      }
-
-      //Add toolbar
-      if (options.toolbar != undefined) {
+      //Add search and toolbar
+      if (options.toolbar != undefined || options.search != undefined) {
         html += '<div class="expand-toolbar">';
 
-        for (let i = 0; i < options.toolbar.length; i++) {
-          html += options.toolbar[i];
+        if (options.toolbar != undefined) {
+          for (let i = options.toolbar.length - 1; i >= 0; i--) {
+            html += options.toolbar[i];
+          }
+        }
+
+        if (options.search != undefined) {
+          html += '<div class="expand-search"><input type="search" class="expand-search-input" placeholder="Search..."/></div>';
         }
 
         html += '</div>';
@@ -164,6 +175,11 @@ jQuery.fn.extend({
           }
           
           html += '</div>';
+
+          //Add checkbox
+          if (options.checkboxes == true) {
+            html += '<input type="checkbox" expand-item-id="' + options.items[i].id + '" id="check_' + options.items[i].id + '_" name="check[' + options.items[i].id + ']" class="expand-item-check" />';
+          }
 
           //Add title
           html += '<div expand-item-id="' + options.items[i].id + '" class="expand-item-title">';
@@ -197,6 +213,10 @@ jQuery.fn.extend({
         });
       }
 
+      if (options.checkboxes == true) {
+        $('.expand-item-check').expandCheck();
+      }
+
       let children = $(view).children();
 
       for (let i = 0; i < children.length; i++) {
@@ -209,12 +229,12 @@ jQuery.fn.extend({
             let arrowElement = $($(children[i]).children()[0]);
 
             arrowElement.click(function() {
-              arrowElement.expand(options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
+              arrowElement.expand(options.checkboxes, options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
             });
 
             //If item is by default open, we show it's nested items
             if (options.items[index].open == true) {
-              arrowElement.expand(options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
+              arrowElement.expand(options.checkboxes, options.items[index].children, options.items[index].closeIcon, options.items[index].openIcon);
             }
           }
         }
